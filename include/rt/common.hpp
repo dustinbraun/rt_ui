@@ -2,16 +2,6 @@
 
 #include <iostream>
 
-// Allows us to change the inline behaviour if the compiler directly in the code or a config.hpp.
-// I know, generally its said that the compiler knows much better than a human what should be inlined and what not,
-// but I some trust issues here probably :D
-// Anyway, we can not loose, just win with this option. there is no drawback, we can change it to be empty if we wish.
-// It also indicates clearly that we seriously want to inline a method or function. E.g. when we know that a method
-// will be called very often, we may want to force an inline because the compiler may not detect this without proper profiling.
-// method which are declared RT_INLINE should also be defined and declared in a header file so that the code can be optimized
-// even without LTO.
-// LTO costs time, and time costs money, and money costs...
-
 // #define RT_INLINE
 #define RT_INLINE inline
 // #define RT_INLINE __force_inline

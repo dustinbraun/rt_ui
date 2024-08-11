@@ -13,7 +13,7 @@ public:
 
 	RT_INLINE HAlignR(Component* content) : m_content(content) {
 		if (content) {
-			content->set_parent(this);
+			content->set_parent_once(this);
 		}
 	}
 

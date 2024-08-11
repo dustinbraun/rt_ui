@@ -94,7 +94,7 @@ public:
 	}
 	
 	RT_INLINE Box(const BoxDesc& desc, Component* content) noexcept : m_desc(desc), m_content(content) {
-		m_content->set_parent(this);
+		m_content->set_parent_once(this);
 	}
 
 	Box(const Box&) = delete;

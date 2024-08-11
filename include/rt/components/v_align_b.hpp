@@ -8,7 +8,9 @@ class RenderTarget;
 class VAlignB final : public Component {
 public:
 	RT_INLINE VAlignB(Component* content) noexcept : m_content(content) {
-
+		if (content) {
+			content->set_parent_once(this);
+		}
 	}
 
 	VAlignB(const VAlignB&) = delete;

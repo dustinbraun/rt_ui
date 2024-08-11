@@ -54,7 +54,9 @@ public:
 class Expand : public Component {
 public:
 	RT_INLINE Expand(const ExpandDesc& desc, Component* content) noexcept : m_desc(desc), m_content(content) {
-
+		if (content) {
+			content->set_parent_once(this);
+		}
 	}
 
 	Expand(const Expand&) = delete;

@@ -15,7 +15,6 @@ class RenderTarget;
 // The problem is that get_requested_size() is also recursive for some nodes and for very deep UIs, it could become a performance
 // problem because the layout() function must be called whenever there was a layout change in the ui, in any node!
 // So this method must be as fast as possible, but the benefit is a responsive, dynamic and easy to extent UI.
-// We actually dont need a parent pointer yet, lets see how far we get without one^^
 class ComponentSizeCache {
 public:
 	Size m_provided;
@@ -51,11 +50,15 @@ public:
 
 	Component& operator = (Component&&) = delete;
 
-	RT_INLINE void set_parent(Component* parent) noexcept {
+	// We do not support changing the parent multiple times yet.
+	RT_INLINE void set_parent_once(Component* parent) noexcept {
+		if (m_parent) {
+			panic("Parent componend changed a second time. This is not supported yet.");
+		}
 		m_parent = parent;
 	}
 
-	RT_INLINE Component* get_parent() noexcept {
+	RT_INLINE Component* get_parent() const noexcept {
 		return m_parent;
 	}
 

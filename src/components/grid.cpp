@@ -16,7 +16,12 @@ Grid::~Grid() noexcept {
 }
 
 void Grid::push_row(std::vector<Component*>&& contents) noexcept {
-	m_contents.push_back(std::move(contents));
+	const auto& row = m_contents.emplace_back(std::move(contents));
+	for (auto* content : row) {
+		if (content) {
+			content->set_parent_once(this);
+		}
+	}
 }
 
 Size Grid::get_requested_size(const Size& provided_size) noexcept {

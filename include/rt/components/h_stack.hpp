@@ -12,7 +12,11 @@ public:
 	RT_INLINE HStack() = default;
 
 	RT_INLINE HStack(std::vector<Component*>&& contents) noexcept : m_contents(std::move(contents)) {
-
+		for (auto* content : m_contents) {
+			if (content) {
+				content->set_parent_once(this);
+			}
+		}
 	}
 
 	HStack(const HStack&) = delete;
